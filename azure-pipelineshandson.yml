@@ -9,7 +9,14 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+
+
+
 steps:
+
+- script: 
+     echo "all files"
+     ls -R 
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
