@@ -23,19 +23,8 @@ steps:
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    rootFolderOrFile: '/home/vsts/work/1/s/samplejavaappcode/target/'
     includeRootFolder: true
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    archiveFile: 'test'
     replaceExistingArchive: true
-
-
-
-- task: AzureRmWebAppDeployment@5
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Pay-As-You-Go(1)(a718d2ec-92b4-46c5-b6d3-be045fe8dca2)'
-    appType: 'webAppLinux'
-    WebAppName: 'centralusssss'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    DeploymentTypeLinux: 'oneDeploy'
