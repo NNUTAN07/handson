@@ -21,9 +21,17 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
 
 
-- task: Docker@2
+
+#- task: Docker@2
   inputs:
     containerRegistry: 'dockerhub-service connection'
     repository: 'nutan69/trail'
@@ -31,7 +39,7 @@ steps:
     Dockerfile: '**/Dockerfile'
 
 
-- task: AzureWebAppContainer@1
+#- task: AzureWebAppContainer@1
   inputs:
     azureSubscription: 'Pay-As-You-Go(1)(a718d2ec-92b4-46c5-b6d3-be045fe8dca2)'
     appName: 'centralusssss'
