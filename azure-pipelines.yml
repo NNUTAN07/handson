@@ -29,3 +29,10 @@ steps:
     repository: 'nutan69/trail'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+
+
+- task: AzureWebAppContainer@1
+  inputs:
+    azureSubscription: 'Pay-As-You-Go(1)(a718d2ec-92b4-46c5-b6d3-be045fe8dca2)'
+    appName: 'centralusssss'
+    containers: 'nutan69/trail:9'
