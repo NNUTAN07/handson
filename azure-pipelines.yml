@@ -21,20 +21,23 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '/home/vsts/work/1/s/samplejavaappcode/target/'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: 'test'
-    replaceExistingArchive: true
 
 
-- task: AzureRmWebAppDeployment@5
+- task: Docker@2
   inputs:
-    ConnectionType: 'AzureRM'
+    containerRegistry: 'dockerhub-service connection'
+    repository: 'nutan69/trail'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+
+
+- task: AzureWebAppContainer@1
+  inputs:
     azureSubscription: 'Pay-As-You-Go(1)(a718d2ec-92b4-46c5-b6d3-be045fe8dca2)'
-    appType: 'webAppLinux'
-    WebAppName: 'centralusssss'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    DeploymentTypeLinux: 'zipDeploy'
+    appName: 'centralusssss'
+    containers: 'nutan69/trail:$(Build.BuildId)'
+
+
+
+
+
